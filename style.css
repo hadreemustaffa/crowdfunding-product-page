@@ -1,0 +1,144 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Prevent font size inflation */
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+/* Remove default margin in favour of better control in authored CSS */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin-block-end: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+  line-height: 1.1;
+}
+
+/* Balance text wrapping on headings */
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+  scroll-margin-block: 5ex;
+}
+/* Reset end */
+
+:root {
+  --ff-primary: 'Commissioner', sans-serif;
+
+  --fs-xxl: 1.5rem;
+  --fs-xl: 1rem;
+  --fs-lg: 0.875rem;
+  --fs-md: 0.75rem;
+
+  --fw-bold: 700;
+  --fw-medium: 500;
+  --fw-regular: 400;
+
+  --clr-primary-medium: hsl(176, 50%, 47%);
+  --clr-primary-dark: hsl(176, 72%, 28%);
+
+  --clr-neutral-light: hsl(100, 100%, 100%);
+  --clr-neutral-dark: hsl(0, 0%, 48%);
+  --clr-neutral-darkest: hsl(0, 0%, 0%);
+}
+
+/* typography */
+body {
+  font-family: var(--ff-primary);
+  font-size: var(--fs-md);
+  color: var(--clr-neutral-dark);
+}
+h1,
+h2 {
+  font-size: var(--fs-xl);
+  color: var(--clr-neutral-darkest);
+  font-weight: var(--fw-bold);
+}
+h3 {
+  font-size: var(--fs-lg);
+  color: var(--clr-neutral-darkest);
+  font-weight: var(--fw-bold);
+}
+a {
+  font-size: var(--fs-xl);
+  color: var(--clr-neutral-darkest);
+  font-weight: var(--fw-medium);
+  text-decoration: none;
+}
+button {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  color: var(--clr-neutral-light);
+}
+.backers__title,
+.card span {
+  font-size: var(--fs-xxl);
+  color: var(--clr-neutral-darkest);
+  font-weight: var(--fw-bold);
+}
+.card__pledge {
+  color: var(--clr-primary-medium);
+  font-weight: var(--fw-medium);
+}
