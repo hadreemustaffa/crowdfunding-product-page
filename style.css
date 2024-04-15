@@ -23,7 +23,7 @@ figure,
 blockquote,
 dl,
 dd {
-  margin-block-end: 0;
+  margin: 0;
 }
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
@@ -90,7 +90,7 @@ textarea:not([rows]) {
   --fs-xxl: 1.5rem;
   --fs-xl: 1rem;
   --fs-lg: 0.875rem;
-  --fs-md: 0.75rem;
+  --fs-md: 0.813rem;
 
   --fw-bold: 700;
   --fw-medium: 500;
@@ -99,9 +99,12 @@ textarea:not([rows]) {
   --clr-primary-medium: hsl(176, 50%, 47%);
   --clr-primary-dark: hsl(176, 72%, 28%);
 
-  --clr-neutral-light: hsl(100, 100%, 100%);
+  --clr-neutral-lightest: hsl(100, 100%, 100%);
+  --clr-neutral-light: hsl(0, 0%, 85%);
   --clr-neutral-dark: hsl(0, 0%, 48%);
   --clr-neutral-darkest: hsl(0, 0%, 0%);
+
+  --clr-overlay: hsla(0, 0%, 0%, 0.35);
 }
 
 /* typography */
@@ -130,10 +133,10 @@ a {
 button {
   font-size: var(--fs-lg);
   font-weight: var(--fw-bold);
-  color: var(--clr-neutral-light);
+  color: var(--clr-neutral-lightest);
 }
 .backers__title,
-.card span {
+.card__stock span {
   font-size: var(--fs-xxl);
   color: var(--clr-neutral-darkest);
   font-weight: var(--fw-bold);
@@ -141,4 +144,280 @@ button {
 .card__pledge {
   color: var(--clr-primary-medium);
   font-weight: var(--fw-medium);
+}
+
+/* layout */
+html {
+  scroll-behavior: smooth;
+}
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+body {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  overflow-x: hidden;
+}
+header {
+  width: inherit;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  padding: 2rem 1.5rem;
+  transition: padding 0.25s ease-in-out;
+  z-index: 20;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.list-container {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--clr-overlay);
+  z-index: 10;
+}
+nav ul {
+  background-color: var(--clr-neutral-lightest);
+  margin: 5rem 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 6px -4px var(--clr-neutral-dark);
+}
+nav ul li {
+  padding: 1rem;
+}
+nav ul li:not(:first-child) {
+  border-top: 1px solid var(--clr-neutral-light);
+}
+.hero {
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background: linear-gradient(
+    to bottom,
+    var(--clr-overlay),
+    var(--clr-neutral-dark)
+  );
+}
+.hero picture img {
+  width: 100%;
+  height: 35vh;
+  mix-blend-mode: overlay;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+.container {
+  max-width: 730px;
+  background-color: var(--clr-neutral-lightest);
+  box-shadow: 0 0 6px -4px var(--clr-neutral-dark);
+  margin: 1.5rem;
+  padding: 2rem 1.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.intro.container {
+  padding: 3rem 1.5rem;
+}
+.intro {
+  text-align: center;
+  position: relative;
+  z-index: 0;
+  margin-top: 15rem;
+}
+.intro__logo {
+  position: absolute;
+  top: -1.5rem;
+}
+.intro h1 {
+  padding: 0 2rem;
+}
+.intro__buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  width: 100%;
+}
+.btn {
+  background-color: transparent;
+  border: transparent;
+}
+.btn:hover,
+input {
+  cursor: pointer;
+}
+.btn-primary {
+  background-color: var(--clr-primary-medium);
+  padding: 1rem 2.5rem;
+  border-radius: 2rem;
+}
+.btn-nav {
+  position: relative;
+  z-index: 20;
+}
+.btn--disabled {
+  background-color: var(--clr-neutral-dark);
+  padding: 1rem 2.5rem;
+  border-radius: 2rem;
+}
+
+.backers.container {
+  text-align: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.backers__amount::after,
+.backers__people::after {
+  content: '';
+  display: block;
+  width: 75px;
+  height: 1px;
+  margin: 1rem auto 0;
+  border-bottom: 1px solid var(--clr-neutral-light);
+}
+.backers__progress-max {
+  width: 100%;
+  height: 12px;
+  background: hsla(0, 0%, 85%, 0.5);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+.backers__progress-current {
+  width: 80%;
+  height: inherit;
+  background-color: var(--clr-primary-medium);
+  border-radius: 1rem;
+}
+
+.about.container {
+  align-items: start;
+}
+.about ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  gap: 1.5rem;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem 1rem;
+  border: 1px solid var(--clr-neutral-light);
+  border-radius: 0.5rem;
+}
+.card__container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.card__container:last-of-type {
+  gap: 1rem;
+}
+.card__stock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+.card .btn {
+  width: fit-content;
+}
+.card__input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+.card--disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+dialog.modal {
+  max-width: 730px;
+  max-height: 70vh;
+  margin: auto 1.5rem;
+  padding: 1.5rem;
+  border: transparent;
+  border-radius: 0.5rem;
+}
+dialog.modal::backdrop {
+  background-color: var(--clr-overlay);
+}
+dialog.modal ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+dialog.modal::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+}
+form.modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+form input {
+  margin: 0;
+}
+form .card {
+  justify-content: space-between;
+}
+form .card__submit {
+  display: none;
+}
+
+.success.container {
+  text-align: center;
+  display: none;
+}
+
+/* utility classes */
+.flex {
+  display: flex;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.align-center {
+  align-items: center;
+}
+.expanded {
+  translate: 0 0 !important;
+}
+.scrolled {
+  background-color: var(--clr-neutral-darkest);
+  padding: 0.75rem 1.5rem;
+}
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  border: 0 !important;
 }
