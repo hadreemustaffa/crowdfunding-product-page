@@ -1,13 +1,16 @@
 // DOM elements
-const backProject = document.querySelector('#backProject');
-const modal = document.querySelector('dialog');
-const closeModalBtn = document.querySelector('#closeModalBtn');
 const header = document.querySelector('header');
 const navBtn = document.querySelector('nav .btn-nav');
+const form = document.querySelector('form');
 const list = document.querySelector('#listContainer');
-const currentBarProgress = document.querySelector('#currentProgress');
 const currentAmountText = document.querySelector('#currentAmount').textContent;
-const selectRewardButtons = document.querySelectorAll('#selectReward');
+const currentBarProgress = document.querySelector('#currentProgress');
+const backProject = document.querySelector('#backProject');
+
+const modal = document.querySelector('.modal');
+const closeModalBtn = document.querySelector('#closeModalBtn');
+const selectRewardButtons = document.querySelectorAll('.reward');
+const inputGroup = document.querySelectorAll("input[name='reward-group']");
 
 // assets
 const navBtnOpen = './images/icon-hamburger.svg';
@@ -17,22 +20,62 @@ const navBtnClose = './images/icon-close-menu.svg';
 const MAX_AMOUNT = 100000;
 let currentAmount = currentAmountText.replace(/\D/, '');
 
+const modalOpen = () => {
+  modal.style.display = 'flex';
+  modal.setAttribute('opened', '');
+
+  if ((modal.style.display = 'flex')) {
+    document.body.style.overflow = 'hidden';
+  }
+};
+const modalClose = () => {
+  modal.removeAttribute('style');
+  document.body.removeAttribute('style');
+  modal.removeAttribute('opened');
+};
+const addSelectedClass = (element) => {
+  document.querySelector('.selected')?.classList.remove('selected');
+  element.classList.add('selected');
+};
 // event listeners
 backProject.addEventListener('click', () => {
-  modal.showModal();
-});
-closeModalBtn.addEventListener('click', () => {
-  modal.close();
-});
-modal.addEventListener('onmousedown', () => {
-  console.log('test');
-});
+  modalOpen();
 
-selectRewardButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    modal.showModal();
+  inputGroup.forEach((reward) => {
+    if (reward.id == 'input1') {
+      reward.setAttribute('autofocus', '');
+    }
+    reward.checked = false;
   });
 });
+
+for (let i = 0; i < selectRewardButtons.length; i++) {
+  selectRewardButtons[i].addEventListener('click', () => {
+    modalOpen();
+    inputGroup[i + 1].checked = true;
+    inputGroup[i + 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+}
+
+inputGroup.forEach((input) => {
+  const cardEl = input.parentElement.parentElement.parentElement;
+
+  input.addEventListener('click', () => {
+    addSelectedClass(cardEl);
+    input.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+    });
+  });
+});
+
+closeModalBtn.addEventListener('click', () => {
+  modalClose();
+});
+
+// modal.addEventListener('click', () => {
+//   modalClose();
+// });
 
 navBtn.addEventListener('click', () => {
   list.classList.toggle('sr-only');
@@ -46,6 +89,24 @@ navBtn.addEventListener('click', () => {
   }
 });
 
+document.addEventListener('click', (e) => {
+  const isModalOpen = modal.hasAttribute('opened');
+
+  if (isModalOpen) {
+    if (e.target == modal) {
+      modalClose();
+    }
+  }
+});
+document.addEventListener('keydown', (e) => {
+  const isModalOpen = modal.hasAttribute('opened');
+
+  if (isModalOpen) {
+    if (e.key === 'Escape') {
+      modalClose();
+    }
+  }
+});
 document.addEventListener('scroll', () => {
   if (scrollY > 100) {
     header.classList.add('scrolled');
