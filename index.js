@@ -33,12 +33,17 @@ const modalClose = () => {
   document.body.removeAttribute('style');
   modal.removeAttribute('opened');
 };
-const addSelectedClass = (element) => {
+const addClassSelected = (element) => {
+  const card = element.parentElement.parentElement.parentElement;
+
   document.querySelector('.selected')?.classList.remove('selected');
-  element.classList.add('selected');
+  card.classList.add('selected');
 };
+
 // event listeners
 backProject.addEventListener('click', () => {
+  document.querySelector('.selected')?.classList.remove('selected');
+
   modalOpen();
 
   inputGroup.forEach((reward) => {
@@ -54,14 +59,13 @@ for (let i = 0; i < selectRewardButtons.length; i++) {
     modalOpen();
     inputGroup[i + 1].checked = true;
     inputGroup[i + 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    addClassSelected(inputGroup[i + 1]);
   });
 }
 
 inputGroup.forEach((input) => {
-  const cardEl = input.parentElement.parentElement.parentElement;
-
   input.addEventListener('click', () => {
-    addSelectedClass(cardEl);
+    addClassSelected(input);
     input.scrollIntoView({
       behavior: 'smooth',
       block: 'center',
@@ -72,10 +76,6 @@ inputGroup.forEach((input) => {
 closeModalBtn.addEventListener('click', () => {
   modalClose();
 });
-
-// modal.addEventListener('click', () => {
-//   modalClose();
-// });
 
 navBtn.addEventListener('click', () => {
   list.classList.toggle('sr-only');
