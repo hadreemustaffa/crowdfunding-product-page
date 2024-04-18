@@ -100,7 +100,7 @@
           <div class="card__container">
             <p class="card__stock"><span>101</span> left</p>
 
-            <button id="selectReward" class="btn btn-primary">Select Reward</button>
+            <button id="reward1" class="btn btn-primary reward">Select Reward</button>
           </div>
         </li>
 
@@ -116,7 +116,7 @@
           <div class="card__container">
             <p class="card__stock"><span>64</span> left</p>
 
-            <button id="selectReward" class="btn btn-primary">Select Reward</button>
+            <button id="reward2" class="btn btn-primary reward">Select Reward</button>
           </div>
         </li>
 
@@ -132,86 +132,107 @@
           <div class="card__container">
             <p class="card__stock"><span>0</span> left</p>
 
-            <button id="selectReward" class="btn btn--disabled">Out of Stock</button>
+            <button id="reward3" class="btn btn--disabled reward" disabled>Out of Stock</button>
           </div>
         </li>
       </ul>
     </div>
 
-    <dialog class="modal">
-      <form action="" class="modal__form">
-        <div class="flex justify-between align-center">
-          <h2 class="modal__title">Back this project</h2>
-          <button id="closeModalBtn" class="btn" type="button">
-            <img src="./images/icon-close-modal.svg" alt="">
-          </button>
-        </div>
-        <p class="modal__subtitle">Want to support us in bringing Mastercraft Bamboo Monitor Riser out in the world?</p>
+    <div class="modal">
+      <div class="container">
+        <form action="">
+          <div class="flex justify-between align-center">
+            <h2 class="modal__title">Back this project</h2>
+            <button id="closeModalBtn" class="btn" type="button">
+              <img src="./images/icon-close-modal.svg" alt="">
+            </button>
+          </div>
+          <p class="modal__subtitle">Want to support us in bringing Mastercraft Bamboo Monitor Riser out in the world?
+          </p>
 
-        <ul>
-          <li class="card">
-            <div class="card__input">
-              <input type="radio" name="reward-group" id="">
-              <h3 class="card__title">Pledge with no reward</h3>
-            </div>
-            <p class="card__description">
-              Choose to support us without a reward if you simply believe in our project. As a backer,
-              you will be signed up to receive product updates via email.
-            </p>
-            <div class="card__submit"></div>
-          </li>
+          <ul>
+            <li class="card">
+              <div class="card__container">
+                <label for="input1" class="card__title">
+                  <input type="radio" name="reward-group" id="input1" required>
+                  Pledge with no reward
+                </label>
 
-          <li class="card">
-            <div class="card__input">
-              <input type="radio" name="reward-group" id="">
-              <div class="card__input-text">
-                <h3 class="card__title">Bamboo Stand</h3>
-                <p class="card__pledge">Pledge $<span>25</span> or more</p>
+                <p class="card__description">
+                  Choose to support us without a reward if you simply believe in our project. As a backer,
+                  you will be signed up to receive product updates via email.
+                </p>
               </div>
-            </div>
-            <p class="card__description">
-              You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and
-              you’ll be added
-              to a special Backer member list.
-            </p>
-            <p class="card__stock"><span>101</span> left</p>
-            <div class="card__submit"></div>
-          </li>
-
-          <li class="card">
-            <div class="card__input">
-              <input type="radio" name="reward-group" id="">
-              <div class="card__input-text">
-                <h3 class="card__title">Black Edition Stand</h3>
-                <p class="card__pledge">Pledge $<span>75</span> or more</p>
+              <div class="card__submit">
+                <button class="btn btn-primary" type="submit">Continue</button>
               </div>
-            </div>
-            <p class="card__description">
-              You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer
-              member list. Shipping is included.
-            </p>
-            <p class="card__stock"><span>64</span> left</p>
-            <div class="card__submit"></div>
-          </li>
+            </li>
 
-          <li class="card card--disabled">
-            <div class="card__input">
-              <input type="radio" name="reward-group" id="">
-              <div class="card__text">
-                <h3 class="card__title">Mahogany Special Edition</h3>
-                <p class="card__pledge">Pledge $200 or more</p>
+            <li class="card">
+              <div class="card__container">
+                <label for="input2" class="card__title">
+                  <input type="radio" name="reward-group" id="input2" required>
+                  Bamboo Stand
+                  <p class="card__pledge">Pledge $<span>25</span> or more</p>
+                </label>
+                <p class="card__description">
+                  You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign,
+                  and
+                  you’ll be added
+                  to a special Backer member list.
+                </p>
+                <p class="card__stock"><span>101</span> left</p>
               </div>
-            </div>
-            <p class="card__description">
-              You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You’ll be added
-              to our Backer member list. Shipping is included.
-            </p>
-            <p class="card__stock"><span>0</span> left</p>
-            <div class="card__submit"></div>
-          </li>
-        </ul>
-      </form>
-    </dialog>
+              <div class="card__submit">
+                <button class="btn btn-primary" type="submit">Continue</button>
+              </div>
+            </li>
+
+            <li class="card">
+              <div class="card__container">
+                <label for="input3" class="card__title">
+                  <input type="radio" name="reward-group" id="input3" required>
+                  Black Edition Stand
+                  <p class="card__pledge">Pledge $<span>75</span> or more</p>
+                </label>
+                <p class="card__description">
+                  You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer
+                  member list. Shipping is included.
+                </p>
+                <p class="card__stock"><span>64</span> left</p>
+              </div>
+              <div class="card__submit">
+                <div class="card__submit-input_container">
+                  <label for="pledgeAmount">$</label>
+                  <input type="number" name="pledge-amount" id="pledgeAmount">
+                </div>
+                <button class="btn btn-primary" type="submit">Continue</button>
+              </div>
+            </li>
+
+            <li class="card card--disabled">
+              <div class="card__container">
+                <label for="input4" class="card__title">
+                  <input type="radio" name="reward-group" id="input4" disabled>
+                  Mahogany Special Edition
+                  <p class="card__pledge">Pledge $200 or more</p>
+                </label>
+                <p class="card__description">
+                  You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You’ll be
+                  added
+                  to our Backer member list. Shipping is included.
+                </p>
+                <p class="card__stock"><span>0</span> left</p>
+              </div>
+              <div class="card__submit">
+                <button class="btn btn-primary" type="submit">Continue</button>
+              </div>
+            </li>
+          </ul>
+        </form>
+
+      </div>
+    </div>
 
     <div class="success container">
       <img src="./images/icon-check.svg" alt="">
