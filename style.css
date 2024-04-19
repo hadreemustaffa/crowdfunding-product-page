@@ -398,20 +398,25 @@ form ul {
 form .card {
   padding: 0;
   gap: 0;
+  position: relative;
 }
 form .card__container {
   padding: 1.5rem;
   gap: 1.5rem;
 }
 form .card__submit {
-  padding: 1.5rem 1rem;
   display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
   border-top: 1px solid var(--clr-neutral-light);
+  gap: 1.5rem;
+  padding: 1.5rem 1rem;
+  overflow: hidden;
+  text-align: center;
+}
+form .card.selected .card__submit {
+  display: flex;
 }
 form .card__submit-input {
   display: flex;
@@ -491,13 +496,13 @@ form input[type='radio']:checked::before {
   transform: scale(1);
 }
 
-form .card.selected .card__submit {
-  display: flex;
-}
-
-.success.container {
-  text-align: center;
+.success {
   display: none;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 @media screen and (min-width: 48rem) {

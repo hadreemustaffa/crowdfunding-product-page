@@ -120,7 +120,7 @@
           </div>
         </li>
 
-        <li class="card card--disabled">
+        <li class="card">
           <div class="card__container">
             <h3 class="card__title">Mahogany Special Edition</h3>
             <p class="card__pledge">Pledge $<span>200</span> or more</p>
@@ -140,7 +140,7 @@
 
     <div class="modal">
       <div class="container">
-        <form action="">
+        <form action="#">
           <div class="flex justify-between align-center">
             <h2 class="modal__title">Back this project</h2>
             <button id="closeModalBtn" class="btn" type="button">
@@ -186,9 +186,9 @@
               <div class="card__submit">
                 <p>Enter your pledge</p>
                 <div class="card__submit-input">
-                  <label for="pledgeAmount">
+                  <label for="pledge1">
                     $
-                    <input type="number" name="pledge-amount" id="pledgeAmount">
+                    <input type="number" name="pledge-amount" id="pledge1">
                   </label>
                   <button class="btn btn-primary" type="submit">Continue</button>
                 </div>
@@ -211,19 +211,19 @@
               <div class="card__submit">
                 <p>Enter your pledge</p>
                 <div class="card__submit-input">
-                  <label for="pledgeAmount">
+                  <label for="pledge2">
                     $
-                    <input type="number" name="pledge-amount" id="pledgeAmount">
+                    <input type="number" name="pledge-amount" id="pledge2">
                   </label>
                   <button class="btn btn-primary" type="submit">Continue</button>
                 </div>
               </div>
             </li>
 
-            <li class="card card--disabled">
+            <li class="card">
               <div class="card__container">
                 <label for="input4" class="card__title">
-                  <input type="radio" name="reward-group" id="input4" disabled>
+                  <input type="radio" name="reward-group" id="input4" required disabled>
                   Mahogany Special Edition
                   <p class="card__pledge">Pledge $200 or more</p>
                 </label>
@@ -237,9 +237,9 @@
               <div class="card__submit">
                 <p>Enter your pledge</p>
                 <div class="card__submit-input">
-                  <label for="pledgeAmount">
+                  <label for="pledge3">
                     $
-                    <input type="number" name="pledge-amount" id="pledgeAmount">
+                    <input type="number" name="pledge-amount" id="pledge3">
                   </label>
                   <button class="btn btn-primary" type="submit">Continue</button>
                 </div>
@@ -248,16 +248,15 @@
           </ul>
         </form>
 
+        <div class="success">
+          <img src="./images/icon-check.svg" alt="">
+          <h2 class="success__title">Thank you for your support!</h2>
+          <p class="success__description">Thanks for your support!
+            Your pledge brings us one step closer to sharing Mastercraft Bamboo Monitor Riser worldwide. You will get
+            an email once our campaign is completed.</p>
+          <button id="closeMessage" class="btn btn-primary" type="button">Got it</button>
+        </div>
       </div>
-    </div>
-
-    <div class="success container">
-      <img src="./images/icon-check.svg" alt="">
-      <h2 class="success__title">Thank you for your support!</h2>
-      <p class="success__description">Thanks for your support!
-        Your pledge brings us one step closer to sharing Mastercraft Bamboo Monitor Riser worldwide. You will get
-        an email once our campaign is completed.</p>
-      <button id="closeMessage" class="btn btn-primary" type="button">Got it</button>
     </div>
   </main>
   <script src="index.js"></script>
