@@ -59,7 +59,7 @@
 
     <div class="backers container">
       <div class="backers__amount">
-        <p class="backers__title">$ <span id="currentAmount">89,914</span></p>
+        <p class="backers__title">$<span id="currentAmount">89,914</span></p>
         <p class="backers__subtitle">of $100,000 backed</p>
       </div>
       <div class="backers__people">
@@ -140,7 +140,7 @@
 
     <div class="modal">
       <div class="container">
-        <form action="#">
+        <form action="#" autocomplete="off">
           <div class="flex justify-between align-center">
             <h2 class="modal__title">Back this project</h2>
             <button id="closeModalBtn" class="btn" type="button">
@@ -188,7 +188,7 @@
                 <div class="card__submit-input">
                   <label for="pledge1">
                     $
-                    <input type="number" name="pledge-amount" id="pledge1">
+                    <input type="number" name="pledge-amount" id="pledge1" min="25" max="5000" placeholder="25">
                   </label>
                   <button class="btn btn-primary" type="submit">Continue</button>
                 </div>
@@ -213,7 +213,7 @@
                 <div class="card__submit-input">
                   <label for="pledge2">
                     $
-                    <input type="number" name="pledge-amount" id="pledge2">
+                    <input type="number" name="pledge-amount" id="pledge2" min="75" max="5000" placeholder="75">
                   </label>
                   <button class="btn btn-primary" type="submit">Continue</button>
                 </div>
@@ -223,7 +223,7 @@
             <li class="card">
               <div class="card__container">
                 <label for="input4" class="card__title">
-                  <input type="radio" name="reward-group" id="input4" required disabled>
+                  <input type="radio" name="reward-group" id="input4" min="250" max="999" disabled>
                   Mahogany Special Edition
                   <p class="card__pledge">Pledge $200 or more</p>
                 </label>
