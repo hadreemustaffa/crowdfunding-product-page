@@ -3,17 +3,18 @@ const header = document.querySelector('header');
 const navButton = document.querySelector('nav .btn-nav');
 const form = document.querySelector('form');
 const list = document.querySelector('#listContainer');
-const currentAmountText = document.querySelector('#currentAmount').textContent;
+const currentPledgeAmount = document.querySelector('#currentAmount');
+const currentBackersAmount = document.querySelector('.backers__title');
 const currentBarProgress = document.querySelector('#currentProgress');
 const backProject = document.querySelector('#backProject');
 
 const modal = document.querySelector('.modal');
 const closeModalButton = document.querySelector('#closeModalBtn');
 const selectRewardButtons = document.querySelectorAll('.reward');
-const inputGroup = document.querySelectorAll("input[name='reward-group']");
+const inputRadios = document.querySelectorAll("input[name='reward-group']");
 const amountInStock = document.querySelectorAll('.card__stock span');
 const successMessage = document.querySelector('.success');
-const messageButton = document.querySelector('#closeMessage');
+const successMessageButton = document.querySelector('#closeMessage');
 
 // assets
 const navButtonOpen = './images/icon-hamburger.svg';
@@ -21,7 +22,8 @@ const navButtonClose = './images/icon-close-menu.svg';
 
 // features
 const MAX_AMOUNT = 100000;
-let currentAmount = currentAmountText.replace(/\D/, '');
+let updatedPledgeAmount;
+let updatedBackers;
 
 amountInStock.forEach((amount) => {
   const convertedAmount = Number(amount.textContent);
@@ -29,6 +31,17 @@ amountInStock.forEach((amount) => {
     amount.closest('.card').classList.add('card--disabled');
   }
 });
+
+const calculateProgress = () => {
+  let totalPledgeAmount = Number(
+    currentPledgeAmount.textContent.replace(/\D/, '')
+  );
+  let widthInPercent = (totalPledgeAmount / MAX_AMOUNT) * 100;
+
+  currentBarProgress.style.width = `${widthInPercent}%`;
+};
+
+calculateProgress();
 
 const modalOpen = () => {
   modal.style.display = 'flex';
@@ -47,44 +60,79 @@ const modalClose = () => {
   form.removeAttribute('style');
 };
 
-const addClassSelected = (element) => {
-  const card = element.parentElement.parentElement.parentElement;
-
+const removeDuplicateClass = () => {
   document.querySelector('.selected')?.classList.remove('selected');
-  card.classList.add('selected');
 };
 
-const scrollIntoView = (input) => {
-  const card = input.closest('.card');
-  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+const addClassSelected = (element) => {
+  removeDuplicateClass();
+  element.classList.add('selected');
+};
+
+const scrollIntoView = (element) => {
+  element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+};
+
+const validateForm = () => {
+  const card = document.querySelector('.card.selected');
+  const cardInputNumber = card.querySelector("input[type='number']");
+  let totalPledgeAmount = Number(
+    currentPledgeAmount.textContent.replace(/\D/, '')
+  );
+  let inputValue = Number(cardInputNumber.value);
+
+  const calculatePledgeAmount = () => {
+    updatedAmount = inputValue + totalPledgeAmount;
+    currentPledgeAmount.textContent = updatedAmount.toLocaleString('en-US', {
+      style: 'decimal',
+      trailingZeroDisplay: 'stripIfInteger',
+    });
+    calculateProgress(updatedAmount);
+  };
+
+  if (
+    !cardInputNumber.parentElement.classList.contains('error') &&
+    inputValue != ''
+  ) {
+    calculatePledgeAmount();
+    successMessage.style.display = 'flex';
+    form.style.display = 'none';
+  }
+
+  if (inputValue == '') {
+    cardInputNumber.parentElement.classList.add('error');
+  }
 };
 
 // event listeners
 backProject.addEventListener('click', () => {
-  document.querySelector('.selected')?.classList.remove('selected');
+  removeDuplicateClass();
   modalOpen();
 
-  inputGroup.forEach((reward) => {
-    if (reward.id == 'input1') {
-      reward.setAttribute('autofocus', '');
+  inputRadios.forEach((radio) => {
+    radio.checked = false;
+    if (radio.id == 'input1') {
+      radio.focus();
+      radio.checked = true;
+      addClassSelected(radio.closest('.card'));
+      scrollIntoView(radio.closest('.card'));
     }
-    reward.checked = false;
   });
 });
 
 for (let i = 0; i < selectRewardButtons.length; i++) {
   selectRewardButtons[i].addEventListener('click', () => {
     modalOpen();
-    inputGroup[i + 1].checked = true;
-    scrollIntoView(inputGroup[i + 1]);
-    addClassSelected(inputGroup[i + 1]);
+    inputRadios[i + 1].checked = true;
+    scrollIntoView(inputRadios[i + 1].closest('.card'));
+    addClassSelected(inputRadios[i + 1].closest('.card'));
   });
 }
 
-inputGroup.forEach((input) => {
-  input.addEventListener('click', () => {
-    addClassSelected(input);
-    scrollIntoView(input);
+inputRadios.forEach((radio) => {
+  radio.addEventListener('click', () => {
+    addClassSelected(radio.closest('.card'));
+    scrollIntoView(radio.closest('.card'));
   });
 });
 
@@ -92,9 +140,27 @@ closeModalButton.addEventListener('click', () => {
   modalClose();
 });
 
-form.addEventListener('submit', () => {
-  successMessage.style.display = 'flex';
-  form.style.display = 'none';
+form.addEventListener('input', (e) => {
+  const selectedCard = document.querySelector('.card.selected');
+  const inputNumber = selectedCard.querySelector("input[type='number']");
+
+  if (e.target == inputNumber) {
+    let input = e.target.value.slice(0, 4);
+
+    e.target.value = input;
+
+    if (input == '') {
+      inputNumber.parentElement.classList.add('error');
+    } else {
+      inputNumber.parentElement.removeAttribute('class');
+    }
+  }
+});
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  validateForm('form');
 });
 
 navButton.addEventListener('click', () => {
@@ -109,11 +175,11 @@ navButton.addEventListener('click', () => {
   }
 });
 
-messageButton.addEventListener('click', () => {
+successMessageButton.addEventListener('click', () => {
   modalClose();
 });
 
-document.addEventListener('click', (e) => {
+document.addEventListener('mouseup', (e) => {
   const isModalOpen = modal.hasAttribute('opened');
 
   if (isModalOpen) {
@@ -121,13 +187,8 @@ document.addEventListener('click', (e) => {
       modalClose();
     }
   }
-
-  if (isModalOpen && successMessage.hasAttribute('style')) {
-    if (e.target == modal) {
-      modalClose();
-    }
-  }
 });
+
 document.addEventListener('keydown', (e) => {
   const isModalOpen = modal.hasAttribute('opened');
 
