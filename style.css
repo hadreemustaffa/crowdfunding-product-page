@@ -313,6 +313,7 @@ label {
   height: inherit;
   background-color: var(--clr-primary-medium);
   border-radius: 1rem;
+  transition: width 0.5s ease-in;
 }
 
 .about.container {
@@ -505,12 +506,6 @@ form input[type='radio']:checked::before {
   justify-content: center;
 }
 
-@media screen and (min-width: 48rem) {
-  dialog.modal {
-    margin: auto;
-  }
-}
-
 /* utility classes */
 .flex {
   display: flex;
@@ -530,6 +525,9 @@ form input[type='radio']:checked::before {
 }
 .selected {
   border: 1px solid var(--clr-primary-medium);
+}
+.error {
+  border: 1px solid red !important;
 }
 .sr-only {
   position: absolute !important;
