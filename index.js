@@ -72,7 +72,7 @@ const removeDuplicateClass = (className) => {
 };
 
 const addClass = (className, element) => {
-  removeDuplicateClass();
+  removeDuplicateClass('selected');
   element.classList.add(`${className}`);
 };
 
@@ -158,7 +158,7 @@ const validateForm = () => {
 
 // event listeners
 backProject.addEventListener('click', () => {
-  removeDuplicateClass();
+  removeDuplicateClass('selected');
   modalOpen();
 
   inputRadios.forEach((radio) => {
