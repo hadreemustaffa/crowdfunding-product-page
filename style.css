@@ -135,10 +135,14 @@ a {
   font-weight: var(--fw-medium);
   text-decoration: none;
 }
-button {
+button:not(button#bookmarkProject) {
   font-size: var(--fs-lg);
   font-weight: var(--fw-bold);
   color: var(--clr-neutral-lightest);
+}
+button#bookmarkProject {
+  color: var(--clr-neutral-dark);
+  font-weight: var(--fw-bold);
 }
 .backers__title,
 .card__stock span {
@@ -190,7 +194,10 @@ ul {
   left: 0;
   background-color: var(--clr-overlay);
   z-index: 10;
+  translate: 0 -150%;
+  transition: translate 0.35s ease;
 }
+
 nav ul {
   background-color: var(--clr-neutral-lightest);
   margin: 5rem 1.5rem;
@@ -260,8 +267,26 @@ main {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 0.25rem;
+  gap: 0.5rem;
   width: 100%;
+}
+button#bookmarkProject {
+  background-color: hsla(0, 0%, 85%, 0.25);
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0;
+  gap: 1rem;
+  border-radius: 2rem;
+  transition: opacity 0.25s ease;
+}
+button#bookmarkProject:hover {
+  opacity: 0.75;
+}
+button#bookmarkProject span {
+  display: none;
+  padding-right: 1.5rem;
 }
 .btn {
   background-color: transparent;
@@ -276,6 +301,10 @@ label {
   background-color: var(--clr-primary-medium);
   padding: 1rem 2.5rem;
   border-radius: 2rem;
+  transition: background-color 0.25s ease;
+}
+.btn-primary:hover {
+  background-color: var(--clr-primary-dark);
 }
 .btn-nav {
   position: relative;
@@ -304,7 +333,7 @@ label {
 .backers__progress-max {
   width: 100%;
   height: 12px;
-  background: hsla(0, 0%, 85%, 0.5);
+  background: hsla(0, 0%, 85%, 0.25);
   border-radius: 1rem;
   overflow: hidden;
 }
@@ -327,11 +356,13 @@ label {
   gap: 1.5rem;
 }
 .card {
-  display: grid;
-  gap: 1.5rem;
   padding: 1.5rem 1rem;
   border: 1px solid var(--clr-neutral-light);
   border-radius: 0.5rem;
+}
+.about .card {
+  display: grid;
+  gap: 1.5rem;
 }
 .card__container {
   display: flex;
@@ -427,6 +458,7 @@ form .card__submit-input {
   gap: 1rem;
 }
 form .card__submit-input label {
+  width: 139px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -506,6 +538,117 @@ form input[type='radio']:checked::before {
   justify-content: center;
 }
 
+@media (min-width: 36rem) {
+  .intro__buttons {
+    justify-content: space-between;
+  }
+  button#bookmarkProject span {
+    display: flex;
+  }
+
+  .container {
+    padding: 2rem 2.5rem;
+  }
+
+  .backers.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 2.5rem;
+    grid-template-rows: auto auto;
+    text-align: left;
+  }
+  .backers__amount,
+  .backers__people {
+    border-right: 1px solid var(--clr-neutral-light);
+  }
+  .backers__amount::after,
+  .backers__people::after {
+    display: none;
+  }
+  .backers__progress-max {
+    grid-area: 2 / 1 / 2 / 4;
+  }
+
+  .about .card__container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  form .card__container {
+    display: grid;
+    grid-template-columns: 2.5rem auto auto;
+    grid-template-rows: auto 1fr;
+    gap: 0;
+    row-gap: 1rem;
+  }
+  form label.card__title {
+    grid-area: 1 / 1 / 1 / 3;
+    grid-template-columns: 26px auto 1fr;
+    grid-template-rows: 1fr;
+    row-gap: 0;
+  }
+  form label .card__pledge {
+    grid-area: 1 / 3 / 1 / 4;
+  }
+  form .card__description {
+    grid-area: 2 / 2 / 2 / 4;
+  }
+  form .card__stock {
+    grid-area: 1 / 3 / 1 / 4;
+  }
+  form .card__submit,
+  form .card__submit-input {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+}
+
+@media (min-width: 48rem) {
+  a {
+    color: var(--clr-neutral-lightest);
+    font-weight: var(--fw-regular);
+  }
+
+  header {
+    padding-left: 5rem !important;
+    padding-right: 5rem !important;
+  }
+  .list-container {
+    background-color: transparent;
+    height: fit-content;
+    position: static;
+    translate: 0;
+  }
+  nav ul {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    background-color: transparent;
+    box-shadow: none;
+  }
+  nav ul li {
+    padding: 0;
+  }
+  nav ul li:not(:first-child) {
+    border-top: transparent;
+  }
+  nav ul li a:hover {
+    text-decoration: underline;
+  }
+  .btn-nav {
+    display: none;
+  }
+}
+
+@media (min-width: 62rem) {
+  header {
+    padding-left: 10rem !important;
+    padding-right: 10rem !important;
+  }
+}
+
 /* utility classes */
 .flex {
   display: flex;
@@ -515,6 +658,15 @@ form input[type='radio']:checked::before {
 }
 .align-center {
   align-items: center;
+}
+.active {
+  color: var(--clr-primary-dark) !important;
+}
+.active .icon circle {
+  fill: var(--clr-primary-dark);
+}
+.active .icon path {
+  fill: var(--clr-neutral-lightest);
 }
 .expanded {
   translate: 0 0 !important;
@@ -529,7 +681,7 @@ form input[type='radio']:checked::before {
 .error {
   border: 1px solid red !important;
 }
-.sr-only {
+/* .sr-only {
   position: absolute !important;
   width: 1px !important;
   height: 1px !important;
@@ -538,4 +690,4 @@ form input[type='radio']:checked::before {
   overflow: hidden !important;
   clip: rect(0, 0, 0, 0) !important;
   border: 0 !important;
-}
+} */
