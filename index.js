@@ -72,7 +72,7 @@ const removeDuplicateClass = (className) => {
 };
 
 const addClass = (className, element) => {
-  removeDuplicateClass('selected');
+  removeDuplicateClass(`${className}`);
   element.classList.add(`${className}`);
 };
 
