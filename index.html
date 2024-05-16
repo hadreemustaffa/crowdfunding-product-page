@@ -24,7 +24,7 @@
         <img src="./images/icon-hamburger.svg" alt="">
       </button>
 
-      <div id="listContainer" class="list-container" aria-expanded="false">
+      <div id="listContainer" class="list-container" role="navigation" aria-expanded="false">
         <ul>
           <li><a href="#aboutSection">About</a></li>
           <li><a href="#">Discover</a></li>
@@ -37,16 +37,14 @@
   <main>
     <div class="hero">
       <picture>
-        <source media="(max-width: 767px)" srcset="./images/image-hero-mobile.jpg" type="image/jpg"
-          alt="close up image of desktop setup">
-        <source media="(min-width: 768px)" srcset="./images/image-hero-desktop.jpg" type="image/jpg"
-          alt="close up image of desktop setup">
+        <source media="(max-width: 767px)" srcset="./images/image-hero-mobile.jpg" type="image/jpg">
+        <source media="(min-width: 768px)" srcset="./images/image-hero-desktop.jpg" type="image/jpg">
         <img src="./images/image-hero-mobile.jpg" alt="close up image of desktop setup">
       </picture>
     </div>
 
     <div class="intro container">
-      <img class="intro__logo" src="./images/logo-mastercraft.svg" width="46px" height="46px" alt="">
+      <img class="intro__logo" src="./images/logo-mastercraft.svg" width="46" height="46" alt="">
       <h1 class="intro__text-title">Mastercraft Bamboo Monitor Riser</h1>
       <p class="intro__text-subtitle">A beautiful & handcrafted monitor stand to reduce neck and eye strain.</p>
       <div class="intro__buttons">
@@ -186,7 +184,7 @@
                 <label for="input2" class="card__title">
                   <input type="radio" name="reward-group" id="input2" required>
                   <span>Bamboo Stand</span>
-                  <p class="card__pledge">Pledge $<span>25</span> or more</p>
+                  <span class="card__pledge">Pledge $<span>25</span> or more</span>
                 </label>
                 <p class="card__description">
                   You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign,
@@ -213,7 +211,7 @@
                 <label for="input3" class="card__title">
                   <input type="radio" name="reward-group" id="input3" required>
                   <span>Black Edition Stand</span>
-                  <p class="card__pledge">Pledge $<span>75</span> or more</p>
+                  <span class="card__pledge">Pledge $<span>75</span> or more</span>
                 </label>
                 <p class="card__description">
                   You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer
@@ -236,9 +234,9 @@
             <li class="card">
               <div class="card__container">
                 <label for="input4" class="card__title">
-                  <input type="radio" name="reward-group" id="input4" min="250" max="999">
+                  <input type="radio" name="reward-group" id="input4">
                   <span>Mahogany Special Edition</span>
-                  <p class="card__pledge">Pledge $200 or more</p>
+                  <span class="card__pledge">Pledge $200 or more</span>
                 </label>
                 <p class="card__description">
                   You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You’ll be
@@ -252,7 +250,7 @@
                 <div class="card__submit-input">
                   <label for="reward3">
                     $
-                    <input type="number" name="pledge-amount" id="reward3">
+                    <input type="number" name="pledge-amount" id="reward3" min="200" max="5000" placeholder="200">
                   </label>
                   <button class="btn btn-primary" type="submit">Continue</button>
                 </div>
